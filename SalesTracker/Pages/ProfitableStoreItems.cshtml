@@ -1,0 +1,29 @@
+﻿@page
+@model SalesTracker.Pages.StoreItemsModel
+@{
+    ViewData["Title"] = "ProfitableStoreItems";
+}
+
+<h1>Most Profitable Store items</h1>
+<hr />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td><strong>Items in store</strong></td>
+            <td>Profit from item</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.items.OrderByDescending(x => x.profitMargin))
+        {
+            <tr>
+                <td>
+                    <strong>@item.ItemName</strong>
+                </td>
+                <td>$@item.profitMargin</td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>

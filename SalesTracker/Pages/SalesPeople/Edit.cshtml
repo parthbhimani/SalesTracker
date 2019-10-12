@@ -1,0 +1,60 @@
+﻿@page
+@model SalesTracker.Pages.SalesPeople.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>SalesPerson</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SalesPerson.Id" />
+            <div class="form-group">
+                <label asp-for="SalesPerson.FirstName" class="control-label"></label>
+                <input asp-for="SalesPerson.FirstName" class="form-control" />
+                <span asp-validation-for="SalesPerson.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalesPerson.LastName" class="control-label"></label>
+                <input asp-for="SalesPerson.LastName" class="form-control" />
+                <span asp-validation-for="SalesPerson.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalesPerson.JoiningDate" class="control-label"></label>
+                <input asp-for="SalesPerson.JoiningDate" class="form-control" />
+                <span asp-validation-for="SalesPerson.JoiningDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalesPerson.LeavingDate" class="control-label"></label>
+                <input asp-for="SalesPerson.LeavingDate" class="form-control" />
+                <span asp-validation-for="SalesPerson.LeavingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SalesPerson.isManager" /> @Html.DisplayNameFor(model => model.SalesPerson.isManager)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalesPerson.DepartmentId" class="control-label"></label>
+                <select asp-for="SalesPerson.DepartmentId" class="form-control" asp-items="ViewBag.DepartmentId"></select>
+                <span asp-validation-for="SalesPerson.DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

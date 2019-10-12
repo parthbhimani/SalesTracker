@@ -1,0 +1,93 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome To Sales Tracker</h1>
+</div>
+<hr />
+<div class="col-md-12 row d-flex">
+    <div class="col-md-6 float-md-left">
+        <table class="table table-striped">
+            <thead >
+                <tr class="table-success"><td colspan="3"><strong>Employees generating most revenue</strong></td></tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SalesPeople.Where(sp => sp.IsEmployed).OrderByDescending(x => x.totalSalesRevenue).Take(5))
+                {
+                <tr>
+                    <td>
+                        @item.DisplayName
+                        @if (item.isManager)
+                        {<span class="badge badge-info">Manager</span>}
+                    </td>
+                    <td>$ @item.totalSalesRevenue</td>
+                    <td width="20%"><a class="button" href="/Forms/AwardNoticeSPForm?id=@item.Id&isAward=true">Felicitate</a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 float-md-right">
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-warning"><td colspan="3"><strong>Employees generating least revenue</strong></td></tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SalesPeople.Where(sp => sp.IsEmployed).OrderBy(x => x.totalSalesRevenue).Take(5))
+                {
+                    <tr>
+                        <td>
+                            @item.DisplayName
+                            @if (item.isManager)
+                            {<span class="badge badge-info">Manager</span>}
+                        </td>
+                        <td>$ @item.totalSalesRevenue</td>
+                        <td width="20%"><a href="/Forms/AwardNoticeSPForm?id=@item.Id&isAward=false">Notify</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<br>
+<div class="col-md-12 row d-flex">
+    <div class="col-md-6 float-md-left">
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-info"><td colspan="3"><strong>Most Awarded Employees</strong></td></tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SalesPeople.Where(sp => sp.IsEmployed).OrderByDescending(x => x.AwardsCount).Take(3))
+                {
+                    <tr>
+                        <td>@item.DisplayName</td>
+                        <td>@item.AwardsCount</td>
+                        <td width="20%"><a href="/Forms/PromoteSalesPersonForm?id=@item.Id">Promote</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+    </div>
+    <div class="col-md-6 float-md-right">
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-danger"><td colspan="3"><strong>Most Notified Employees</strong></td></tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SalesPeople.Where(sp => sp.IsEmployed).OrderByDescending(x => x.NoticesCount).Take(3))
+                {
+                <tr>
+                    <td>@item.DisplayName</td>
+                    <td>@item.NoticesCount</td>
+                    <td width="20%"><a href="/Forms/FireSalesPersonForm?id=@item.Id">Fire</a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

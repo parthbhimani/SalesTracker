@@ -1,0 +1,36 @@
+﻿@page
+@model SalesTracker.Pages.Forms.AwardNoticeSPFormModel
+@{
+    ViewData["Title"] = "AwardNoticeSPForm";
+}
+
+<h1>AwardNoticeSPForm</h1>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form method="post" style="margin-top: 50px;">
+
+            <div class="form-group">
+                <label class="control-label">Sales Person Name :</label>
+                <div>
+                    <p class="form-control-static">@Model.SalesPerson.DisplayName</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Joining Date: </label>
+                <div>
+                    <p class="form-control-static">@Model.SalesPerson.JoiningDate.ToString("MM-dd-yyyy")</p>
+                </div>
+            </div>
+
+                <input type="hidden" asp-for="AwardNoticeForm.SalesPersonId" />
+           
+                <div class="form-group">
+                    <input type="submit" value="@Model.ButtonActionString" class="btn btn-primary" />
+                    | <a asp-page="/Index">Back to Dashboard</a>
+                </div>
+
+        </form>
+    </div>
+</div>

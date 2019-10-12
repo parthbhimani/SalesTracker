@@ -1,0 +1,47 @@
+﻿@page
+@model SalesTracker.Pages.Forms.PromoteSalesPersonFormModel
+@{
+    ViewData["Title"] = "PromoteSalesPersonForm";
+}
+
+<h1>PromoteSalesPersonForm</h1>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form method="post" style="margin-top: 50px;">
+
+            <div class="form-group">
+                <label class="control-label">Sales Person Name</label>
+                <div>
+                    <p class="form-control-static">@Model.SalesPerson.DisplayName</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Joining Date</label>
+                <div>
+                    <p class="form-control-static">@Model.SalesPerson.JoiningDate.ToString("MM-dd-yyyy")</p>
+                </div>
+            </div>
+
+            @if (Model.SalesPerson.IsEmployed)
+            {
+
+                <input type="hidden" asp-for="PromoteSFForm.SalesPersonId" />
+                <div class="form-group">
+                    <input type="submit" value="Promote Sales Person" class="btn btn-success" />
+                    | <a asp-page="/Index">Back to Dashboard</a>
+                </div>
+            }
+            else
+            {
+                
+                <div class="alert alert-warning">
+                    <p>This Sales Person is a manager</p>
+                </div>
+                <a asp-page="/Index">Back to Dashboard</a>
+            }
+        </form>
+    </div>
+</div>
+</div>
